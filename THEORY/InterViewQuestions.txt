@@ -1,0 +1,32 @@
+
+/**Abstract class vs Interface**/
+
+  ->Abstract class menas Is-A relationship and interface means CAN-DO/has a relationship.
+  
+  ->Abstract class may contain constructor but interface has not.
+
+  ->Both abstract class and interface can not be instantiated.
+
+  ->Interface enables polymorphism.A class can implement more than one Interfaces.
+
+  ->To achieve best abstraction(use of abstract method) use interface.
+
+  ->In Java you can only extend one class but implement multiple interface.
+
+  ->Interface are used to represent behavior e.g. Runnable,Clonable,Serializable etc.
+    So if we use an abstract class to represent behavior your class can not be 
+    Runnable and Clonable at same time. 
+
+  ->To achieve abstraction we can use abstract class or interface but java does not
+    support multilevel inheritance so if we use abstract class we can not extend more class.
+
+  ->When we need to add methods in future, then abstract class is better choice. 
+    Because adding new methods to an interface causes all implemented classes to
+    be changed to implement the new methods.
+
+  ->Use BankAccounts example for Inheritance(Savings account,Personal Accounts).
+    All these accounts have same deposite method but different withdraw method
+    implementations and they have some common fields i.e. accountNo,Balance etc.
+
+  ->http://stackoverflow.com/questions/18777989/how-should-i-have-explained-the-difference-between-an-interface-and-an-abstract  
+  

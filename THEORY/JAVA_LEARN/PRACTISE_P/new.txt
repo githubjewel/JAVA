@@ -1,0 +1,317 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package resultpublishingsystem;
+
+/**
+ *
+ * @author admin
+ */
+public class Main {
+    public static void main(String[] args) {
+        controller maincontroller= new controller();
+    }
+
+}
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package resultpublishingsystem;
+
+public class course {
+    private String name;
+    private String code;
+    private int credit;
+    private String coursetype;
+    private int marks;
+
+    public course(String n, String c, int cre, String ct)
+    {
+        name=n;
+        code=c;
+        cre=credit;
+        ct=coursetype;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setMarks(int val)
+    {
+        marks=val;
+    }
+
+    public int getMarks()
+    {
+        return marks;
+    }
+
+    public int getCredit()
+    {
+        return credit;
+    }
+
+}
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package resultpublishingsystem;
+public class student {
+    private String name;
+    private String regno;
+    private String rollno;
+    private course[] courselist;
+    private static int regpin=1;
+    private static int rollpin=100;
+
+    public student(String n, String year,String sem, course[] cl)
+    {
+        name=n;
+        regno=regcalc(year,sem);
+        rollno=rollcalc(year,sem);
+        courselist=cl;
+    }
+
+    private String regcalc(String year, String sem)
+    {
+        String res=year+sem+Integer.toString(regpin);
+        regpin++;
+
+        return res;
+    }
+
+    private String rollcalc(String year, String sem)
+    {
+        String res=year+sem+Integer.toString(rollpin);
+        rollpin++;
+
+        return res;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public course[] getCourse()
+    {
+        return courselist;
+    }
+}
+
+
+
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package resultpublishingsystem;
+import java.io.*;
+import java.util.*;
+
+public class controller {
+    public ArrayList<student> studentlist= new ArrayList<student>();
+    model mainmodel;
+    public controller()
+    {
+        mainmodel= new model();
+        options();
+    }
+
+    private void options()
+    {
+        while(true)
+        {
+            Scanner in= new Scanner(System.in);
+            System.out.println("Select Options:");
+            System.out.println("1. Register New Student");
+            System.out.println("2. Mark Entry");
+            System.out.println("3. Result pubish");
+
+            int input=in.nextInt();
+            if(input<0) break;
+
+           view regview= new view(input,this);
+           //regview.registration();
+
+           System.out.println(studentlist.get(0).getName());
+        }
+    }
+
+}
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package resultpublishingsystem;
+import java.util.*;
+
+public class view {
+
+    controller maincontrol;
+
+    public view(int option, controller control)
+    {
+        maincontrol=control;
+        System.out.println("In View");
+        if(option==1)
+            registration();
+        else if(option==2)
+            markentry();
+        else if(option==3)
+            showresult();
+    }
+
+    private void showresult()
+    {
+        System.out.print("Studnt Name: ");
+        Scanner in = new Scanner(System.in);
+        String stuname=in.next().toString();
+        int i,j;
+        for(i=0;i<maincontrol.studentlist.size();i++)
+        {
+            if(maincontrol.studentlist.get(i).getName().compareTo(stuname)==0)
+            {
+
+                course[] courselist= maincontrol.studentlist.get(i).getCourse();
+                for(j=0;j<courselist.length;j++)
+                {
+                    System.out.println(courselist[j].getName());
+                    System.out.println(courselist[j].getMarks());
+                }
+                System.out.println(maincontrol.mainmodel.cgpa(courselist));
+
+                break;
+            }
+        }
+    }
+
+    private void markentry()
+    {
+        System.out.print("Studnt Name: ");
+        Scanner in = new Scanner(System.in);
+        String stuname=in.next().toString();
+        int i,j;
+        for(i=0;i<maincontrol.studentlist.size();i++)
+        {
+            if(maincontrol.studentlist.get(i).getName().compareTo(stuname)==0)
+            {
+                
+                String cName= in.next().toString();
+                course[] courselist= maincontrol.studentlist.get(i).getCourse();
+                for(j=0;j<courselist.length;j++)
+                {
+                    if(cName.compareTo(courselist[j].getName())==0)
+                    {
+                        int value=in.nextInt();
+                        courselist[j].setMarks(value);
+                        break;
+                    }
+                }
+
+                System.out.println(courselist[j].getMarks());
+
+                break;
+            }
+        }
+
+
+    }
+
+    private void registration()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Name: ");
+        String name=in.next();
+        System.out.println();
+        System.out.print("year: ");
+        String year=in.next();
+        System.out.println();
+        System.out.print("semester: ");
+        String sem=in.next();
+
+        course[] courses= new course[100];
+        int i=0;
+        while(true)
+        {
+            System.out.println("Enter Course info(-1 to exit):");
+
+            System.out.print("Course Name: ");
+            String cname=in.next().toString();
+            
+            if(cname.compareTo("-1")==0) break;
+            System.out.print("Course Code: ");
+            String ccode=in.next();
+            if(ccode.compareTo("-1")==0) break;
+            System.out.print("Credit Hours: ");
+            int ccredit=Integer.valueOf(in.next().toString());
+            if(ccredit==-1) break;
+            System.out.print("Course type(Lab or Theory): ");
+            String ctype=in.next();
+            if(ctype.compareTo("-1")==0) break;
+
+            course newcourse= new course(cname,ccode,ccredit,ctype);
+            courses[i]=newcourse;
+
+        }
+        student newstudent= new student(name,year,sem,courses);
+        maincontrol.studentlist.add(newstudent);
+        System.out.println("Registration Complete");
+
+    }
+}
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package resultpublishingsystem;
+public class model {
+
+
+    public double cgpa(course[] clist)
+    {
+        double sum=0.0;
+        double total=0.0;
+        for(int i=0;i<clist.length;i++)
+        {
+            sum+=grade(clist[i].getMarks())*clist[i].getCredit();
+            total+=clist[i].getCredit();
+
+        }
+
+
+
+        return (sum/total);
+    }
+
+    public double grade(int val)
+    {
+        if(val>80)
+            return 4.0;
+        else if(val>70)
+            return 3.50;
+        else if(val>60)
+            return 3.00;
+        else if(val>50)
+            return 2.50;
+        else if(val>40)
+            return 2.00;
+        else
+            return 0.0;
+    }
+
+}

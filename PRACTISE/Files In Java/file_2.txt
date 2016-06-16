@@ -1,0 +1,36 @@
+ 
+        //File f = new File("\\c:\\Desktop\\a.txt
+            
+            //    File f = new File("C:/Desktop/a.txt");
+            
+                      String temp=D:\\a.txt
+            BufferedWriter bw= null;
+            FileReader fr; String line;;
+            try
+            {
+        //temp jai directory indicate korbe shai kan theke 
+                 fr = new FileReader(new File(temp)); //path with file name
+                
+                   BufferedReader br = new BufferedReader(fr);
+                   
+                  line = br.readLine();
+                  
+                   String s;
+                   
+                   while(true)
+                   {
+                       
+                       s=br.readLine();
+                       System.out.println(s);
+                       
+                       if(s==null) break;  line+=s;
+                       line+='\n';
+                   }
+        
+                
+                
+            }catch(Exception e)
+                    {
+                        line="File not Found";
+                    }
+            

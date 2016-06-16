@@ -1,0 +1,2 @@
+http://www.tutorialspoint.com/java/java_strings.htm
+http://www.geom.uiuc.edu/~daeron/docs/apidocs/java.lang.String.html

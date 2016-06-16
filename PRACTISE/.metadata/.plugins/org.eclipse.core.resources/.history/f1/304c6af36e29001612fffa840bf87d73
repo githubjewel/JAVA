@@ -1,0 +1,18 @@
+package datetime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class DateTime {
+
+	public static void main(String[] args) {
+		  Date now = new Date();
+	      
+	      SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+	      System.out.println("Format 3:   " + dateFormatter.format(now));
+	      
+	      String s = dateFormatter.format(now);
+	      System.out.println(s);
+		
+		
+	}
+}

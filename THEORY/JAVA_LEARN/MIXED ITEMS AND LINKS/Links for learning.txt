@@ -1,0 +1,7 @@
+http://www.homeandlearn.co.uk/java/java.html
+http://www.c4learn.com/javaprogramming/
+
+http://www.learnjavaonline.org/en/Loops
+http://www.ntu.edu.sg/home/ehchua/programming/java/J2a_BasicsExercises.html
+http://www.stanford.edu/class/cs106a/
+http://www.cafeaulait.org/javatutorial.html
